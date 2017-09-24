@@ -1,0 +1,51 @@
+.app{
+  position: absolute;
+  left: 40%;
+  top: 30%;
+}
+.table{
+  display: inline-block;
+  padding: 2px;
+  border: 2px solid #6895d9;
+}
+.col{
+  background-color: #6895d9;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #fff;
+  float: left;
+}
+.btn {
+  text-align: center;
+  /*margin: -1px 6px 3px;*/
+  height: 50px;
+  width: 50px;
+  transition:all 0.3s ease;
+  opacity: 1;
+}
+.btn:hover{
+  opacity: 0.7;
+}
+.btn-add{
+  background-color: #f1c940;
+}
+.btn-del{
+  background-color: #de0000;
+}
+.btn-add-row{
+  margin: -1px 6px
+}
+.btn-add-col{
+  float: right;
+  margin: 6px 3px;
+}
+.btn-del-row{
+  margin: 6px -52px;
+  float: left;
+}
+.btn-del-col{
+  margin: 2px 6px;
+}
+.btn__icon{
+  margin-top: 35%;
+}
