@@ -108,7 +108,7 @@ document.querySelector('.btn-del-col').onclick = () =>
     for (let i = 0; i < condidats.length; i++) {
         condidats[i].parentNode.removeChild(condidats[i]);
     }
-    if (document.querySelector('.btn-del-col').classList[3].split('-')[3] === numOfCol){
+    if (document.querySelector('.btn-del-col').classList[3].split('-')[3] == numOfCol){
         numOfCol--;
         let delColBtnMargin = 56 + 6 * numOfCol + 48 * (numOfCol - 1);
         document.querySelector('.btn-del-col').style.margin = '3px 0 3px ' + delColBtnMargin + 'px';
