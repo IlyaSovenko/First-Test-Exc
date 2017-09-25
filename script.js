@@ -19,9 +19,9 @@ function renderApp(isNeed) {
                 topMargin = 56;
                 let delBtns = document.querySelectorAll('.btn-del');
                 delBtns.forEach((btn, i, delBtns) => btn.style.display = 'block');
-                // numOfColAtTime = document.querySelector('.btn-del-col').classList[3] ? document.querySelector('.btn-del-col').classList[3].split('-')[3] : 1;
-                // delColBtnMargin = leftMargin + 6*numOfColAtTime + 48*(numOfColAtTime - 1);
-                // document.querySelector('.btn-del-col').style.margin = '3px 0 3px ' + delColBtnMargin + 'px';
+                numOfColAtTime = document.querySelector('.btn-del-col').classList[3] ? document.querySelector('.btn-del-col').classList[3].split('-')[3] : 1;
+                delColBtnMargin = leftMargin + 6*numOfColAtTime + 48*(numOfColAtTime - 1);
+                document.querySelector('.btn-del-col').style.margin = '3px 0 3px ' + delColBtnMargin + 'px';
                 break;
             case numOfCol > 1 && numOfRow <= 1:
                 leftMargin = 0;
