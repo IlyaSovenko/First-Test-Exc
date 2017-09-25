@@ -72,7 +72,7 @@ function handler(event) {
 }
 document.querySelector('.app').onmouseout = handlerOut;
 function handlerOut() {
-    renderApp(true);
+    renderApp(false);
 }
 document.querySelector('.btn-add-col').onclick = () => {
     let rows = document.querySelectorAll('.row');
