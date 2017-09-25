@@ -17,34 +17,35 @@
 }
 .btn {
   text-align: center;
-  /*margin: -1px 6px 3px;*/
   height: 50px;
   width: 50px;
-  transition:all 0.3s ease;
   opacity: 1;
 }
 .btn:hover{
+  transition:all 0.3s ease;
   opacity: 0.7;
 }
 .btn-add{
   background-color: #f1c940;
 }
 .btn-del{
+  transition:all 0.3s ease;
+  display: none;
   background-color: #de0000;
 }
 .btn-add-row{
-  margin: -1px 6px
+  margin: 0 6px
 }
 .btn-add-col{
   float: right;
   margin: 6px 3px;
 }
 .btn-del-row{
-  margin: 6px -52px;
+  margin: 6px 3px;
   float: left;
 }
 .btn-del-col{
-  margin: 2px 6px;
+  margin: 3px 62px;
 }
 .btn__icon{
   margin-top: 35%;
