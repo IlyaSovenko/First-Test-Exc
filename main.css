@@ -1,52 +1,75 @@
-.app{
-  position: absolute;
-  left: 40%;
-  top: 30%;
+*{
+  padding: 0;
+  margin: 0;
+}
+.supertable-app{
+  display: flex;
+}
+.container_position-center{
+  justify-content: center;
+  margin-top: 15%;
 }
 .table{
   display: inline-block;
-  padding: 2px;
-  border: 2px solid #6895d9;
+  padding: 0.5px;
+  border: 1px solid #48aae6;
 }
-.col{
-  background-color: #6895d9;
-  width: 50px;
-  height: 50px;
-  border: 2px solid #fff;
+.table__col{
+  background-color: #48aae6;
+  width: 37px;
+  height: 37px;
+  border: 0.5px solid #fff;
   float: left;
 }
+.table_direction-column{
+  display: flex;
+  flex-direction: column;
+}
 .btn {
-  text-align: center;
-  height: 50px;
-  width: 50px;
+  color: white;
+  height: 37px;
+  width: 37px;
   opacity: 1;
+  border: 0;
+  cursor: pointer;
 }
 .btn:hover{
   transition:all 0.3s ease;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 .btn-add{
-  background-color: #f1c940;
+  font-size: 0.9em;
+  font-weight: 700;
+  background-color: #f3a500;
+}
+.btn-add::before{
+  content: '+';
 }
 .btn-del{
+  padding-bottom: 5px;
   transition:all 0.3s ease;
+  background-color: #b20000;
+}
+.btn-del_display-none{
   display: none;
-  background-color: #de0000;
 }
-.btn-add-row{
-  margin: 0 6px
+.btn-del::before{
+  content: '-';
+  font-size: 1.7em;
 }
-.btn-add-col{
-  float: right;
-  margin: 6px 3px;
+.table__btn_position-right{
+  margin-top: 40px;
+  margin-left: 1px;
 }
-.btn-del-row{
-  margin: 6px 3px;
-  float: left;
+.table__btn_position-left{
+  margin-top: 40px;
+  margin-right: 1px;
 }
-.btn-del-col{
-  margin: 3px 62px;
+.table__btn_position-top{
+  margin-bottom: 1px;
+  margin-left: 2px;
 }
-.btn__icon{
-  margin-top: 35%;
+.table__btn_position-bottom{
+  margin-top: 1px;
+  margin-left: 2px;
 }
