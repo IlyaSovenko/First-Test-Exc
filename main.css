@@ -5,6 +5,10 @@
 .supertable-app{
   display: flex;
 }
+.app{
+  display: flex;
+  margin: 38px 0 0 38px;
+}
 .container_position-center{
   justify-content: center;
   margin-top: 15%;
@@ -58,7 +62,7 @@
   font-size: 1.7em;
 }
 .table__btn_position-right{
-  margin-top: 40px;
+  margin-top: 2px;
   margin-left: 1px;
 }
 .table__btn_position-left{

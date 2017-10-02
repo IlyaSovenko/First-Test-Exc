@@ -1,138 +1,114 @@
 "use strict";
-var numOfRow = document.querySelector('.row:last-child').className.split('-')[1];
-var numOfCol = document.querySelector('.col:last-child').className.split('-')[1];
-var leftMargin = 56;
-var topMargin = 56;
-function renderApp(isNeed) {
-    if(!isNeed){
-        let delBtns = document.querySelectorAll('.btn-del');
-        delBtns.forEach((btn,i,delBtns) => btn.style.display = 'none');
-        document.querySelector('.app').style.top = window.innerHeight*0.3 + 'px';
-        document.querySelector('.app').style.left = window.innerWidth*0.4 + 'px';
-        document.querySelector('.btn-add-row').style.marginLeft = '6px';
-    }else{
-        var numOfColAtTime;
-        var delColBtnMargin;
-        switch (true) {
-            case numOfCol > 1 && numOfRow > 1:
-                leftMargin = 56;
-                topMargin = 56;
-                let delBtns = document.querySelectorAll('.btn-del');
-                delBtns.forEach((btn, i, delBtns) => btn.style.display = 'block');
-                numOfColAtTime = document.querySelector('.btn-del-col').classList[3] ? document.querySelector('.btn-del-col').classList[3].split('-')[3] : 1;
-                delColBtnMargin = leftMargin + 6*numOfColAtTime + 48*(numOfColAtTime - 1);
-                document.querySelector('.btn-del-col').style.margin = '3px 0 3px ' + delColBtnMargin + 'px';
-                break;
-            case numOfCol > 1 && numOfRow <= 1:
-                leftMargin = 0;
-                topMargin = 56;
-                document.querySelector('.btn-del-row').style.display = 'none';
-                document.querySelector('.btn-del-col').style.display = 'block';
-                numOfColAtTime = document.querySelector('.btn-del-col').classList[3].split('-')[3] || 1;
-                delColBtnMargin = leftMargin + 6*numOfColAtTime + 48*(numOfColAtTime - 1);
-                document.querySelector('.btn-del-col').style.margin = '3px 0 3px ' + delColBtnMargin + 'px';
-                break;
-            case numOfCol <= 1 && numOfRow > 1:
-                leftMargin = 56;
-                topMargin = 0;
-                document.querySelector('.btn-del-row').style.display = 'block';
-                document.querySelector('.btn-del-col').style.display = 'none';
-                break;
-            default:
-                topMargin = 0;
-                leftMargin = 0;
-                document.querySelector('.btn-del-row').style.display = 'none';
-                document.querySelector('.btn-del-col').style.display = 'none';
-
+const TABLE_BLOCK_SIZE = 38;
+const TABLE_BORDER_SIZE = 2;
+class SuperTable {
+    constructor() {
+        this.app = document.querySelector('.app');
+        this.table = document.querySelector('.table');
+        this.btnDelRow = document.querySelector('.table__btn_position-left');
+        this.btnDelCol = document.querySelector('.table__btn_position-top');
+        this.btnAddCol = document.querySelector('.table__btn_position-right');
+        this.isVisibleBtnDelCol = 1;
+    }
+    findNumOfChild(element){
+        let parentArr = [].slice.apply(element.parentNode.children);
+        return parentArr.indexOf(element);
+    }
+    moveBtnDelRow(element){
+        let marginTop = (this.findNumOfChild(element) + this.isVisibleBtnDelCol)*TABLE_BLOCK_SIZE + TABLE_BORDER_SIZE;
+        this.btnDelRow.style.marginTop = marginTop + 'px';
+    }
+    moveBtnDelCol(element){
+        let marginLeft = this.findNumOfChild(element)*TABLE_BLOCK_SIZE + TABLE_BORDER_SIZE;
+        this.btnDelCol.style.marginLeft = marginLeft + 'px';
+    }
+    hideBtnDelCol(val){
+        if(!val && this.table.children[0].children.length <= 1){
+            return;
         }
-        document.querySelector('.app').style.top = window.innerHeight * 0.3 - topMargin + 'px';
-        document.querySelector('.app').style.left = window.innerWidth * 0.4 - leftMargin + 'px';
-        document.querySelector('.btn-add-row').style.marginLeft = Number(leftMargin + 6) + 'px';
+        this.btnDelCol.hidden = val;
+        this.btnAddCol.style.marginTop = (TABLE_BLOCK_SIZE)*(!val) + TABLE_BORDER_SIZE + 'px';
+        this.app.style.marginTop = (TABLE_BLOCK_SIZE)*val + 'px';
     }
-}
-
-document.querySelector('.app').onmouseover = handler;
-function handler(event) {
-    let elem = event.target;
-    renderApp(true);
-    if(elem.className.indexOf('col') >= 0 && elem.className.indexOf('btn') < 0){
-        let numOfRow = elem.parentNode.className.split('-')[1];
-        let delRowBtnMarginTop = 6*numOfRow + 48*(numOfRow - 1) + 'px';
-        document.querySelector('.btn-del-row').style.marginTop = delRowBtnMarginTop;
-        let numOfCol = elem.className.split('-')[1];
-        document.querySelector('.btn-del-row').classList.remove(document.querySelector('.btn-del-row').classList[3]);
-        document.querySelector('.btn-del-row').classList.add('btn-del-row-' + numOfRow);
-        let delColBtnMargin = leftMargin + 6*numOfCol + 48*(numOfCol - 1);
-        document.querySelector('.btn-del-col').style.margin = '3px 0 3px ' + delColBtnMargin + 'px';
-        document.querySelector('.btn-del-col').classList.remove(document.querySelector('.btn-del-col').classList[3]);
-        document.querySelector('.btn-del-col').classList.add('btn-del-col-' + numOfCol);
-
+    hideBtnDelRow(val){
+        if(!val && this.table.children.length <= 1){
+            return;
+        }
+        this.btnDelRow.hidden = val;
+        this.app.style.marginLeft = (TABLE_BLOCK_SIZE)*val + 'px'
     }
-
-}
-document.querySelector('.app').onmouseout = handlerOut;
-function handlerOut() {
-    renderApp(false);
-}
-document.querySelector('.btn-add-col').onclick = () => {
-    let rows = document.querySelectorAll('.row');
-    let cols = document.querySelectorAll('.col');
-
-    for(let i = 0;i < rows.length;i++){
-        let newCol = document.createElement('div');
-        let nextNumOfCol = 1 +  Number(cols[cols.length-1].className.split('-')[1]);
-        newCol.classList.add('col','col-' + nextNumOfCol);
-        rows[i].appendChild(newCol);
+    moveBtns(element){
+        if(element.className !== 'table__col') return;
+        this.moveBtnDelCol(element);
+        this.moveBtnDelRow(element.parentNode);
     }
-    numOfCol++;
-    renderApp(true);
-}
-document.querySelector('.btn-add-row').onclick = () => {
-    let rows = document.querySelectorAll('.row');
-    let newRow = document.createElement('div');
-    let nextNumOfRow = ++numOfRow;
-    newRow.classList.add('row','row-' + nextNumOfRow);
-    for(let i = 0;i < rows[0].childNodes.length;i++){
-        if(rows[0].childNodes[i].nodeName === '#text') continue;
-        let newChild = document.createElement('div');
-        newChild.classList = rows[0].childNodes[i].classList
-        newRow.appendChild(newChild)
+    hideBtns (val) {
+        this.hideBtnDelCol(val);
+        this.hideBtnDelRow(val);
     }
-    document.querySelector('.table').appendChild(newRow);
-    renderApp(true);
-}
-
-document.querySelector('.btn-del-col').onclick = () =>
-{
-    let condidats = document.querySelectorAll('.col-' + numOfCol);
-    for (let i = 0; i < condidats.length; i++) {
-        condidats[i].parentNode.removeChild(condidats[i]);
+    deleteRow (element){
+        let marginTop = element.style.marginTop.split('px')[0];
+        let rowNum = (marginTop - (TABLE_BORDER_SIZE + TABLE_BLOCK_SIZE))/TABLE_BLOCK_SIZE;
+        if(this.table.children.length - 1 === rowNum){
+            element.style.marginTop = marginTop - TABLE_BLOCK_SIZE + 'px';
+        }
+        rowNum = rowNum >= 1 ? rowNum : 0;
+        this.table.removeChild(this.table.children[rowNum]);
+        if(this.table.children.length - 1 <= 0){
+            this.hideBtnDelRow(true);
+        }
     }
-    if (document.querySelector('.btn-del-col').classList[3].split('-')[3] == numOfCol){
-        numOfCol--;
-        let delColBtnMargin = 56 + 6 * numOfCol + 48 * (numOfCol - 1);
-        document.querySelector('.btn-del-col').style.margin = '3px 0 3px ' + delColBtnMargin + 'px';
-        document.querySelector('.btn-del-col').classList.remove(document.querySelector('.btn-del-col').classList[3]);
-        document.querySelector('.btn-del-col').classList.add('btn-del-col-' + numOfCol);
-    }else{
-        numOfCol--;
+    deleteCol (element){
+        let marginLeft = element.style.marginLeft.split('px')[0];
+        let colNum = (marginLeft - (TABLE_BORDER_SIZE))/TABLE_BLOCK_SIZE;
+        if(this.table.children[0].children.length - 1 === colNum){
+            element.style.marginLeft = marginLeft - TABLE_BLOCK_SIZE + 'px';
+        }
+        colNum = colNum >= 1 ? colNum : 0;
+        for(let i = 0;i < this.table.children.length;i++) {
+            this.table.children[i].removeChild(this.table.children[i].children[colNum])
+        }
+        if(this.table.children[0].children.length <= 1){
+            let marginTop = this.btnDelRow.style.marginTop.split('px')[0];
+            marginTop -= TABLE_BLOCK_SIZE;
+            this.btnDelRow.style.marginTop = marginTop + 'px';
+            this.hideBtnDelCol(true);
+            this.isVisibleBtnDelCol = 0;
+        }
     }
-
-    renderApp(true);
-}
-
-document.querySelector('.btn-del-row').onclick = () => {
-    let condidat = document.querySelector('.row-' + numOfRow);
-    condidat.parentNode.removeChild(condidat);
-    if (document.querySelector('.btn-del-row').classList[3].split('-')[3] == numOfRow) {
-        numOfRow--;
-        let delRowBtnMarginTop = 6 * numOfRow + 48 * (numOfRow - 1) + 'px';
-        document.querySelector('.btn-del-row').style.marginTop = delRowBtnMarginTop;
-        document.querySelector('.btn-del-row').classList.remove(document.querySelector('.btn-del-row').classList[3]);
-        document.querySelector('.btn-del-row').classList.add('btn-del-row-' + numOfRow);
-    }else{
-        numOfRow--;
+    addRow(){
+        let newRow = this.table.children[0].cloneNode(true);
+        for(let i = 0;i < newRow.children.length;i++){
+            newRow.children[i].innerHTML = '';
+        }
+        this.table.appendChild(newRow);
+        this.hideBtnDelRow(false);
+    }
+    addCol(){
+        console.log(this.table.children[0].children.length);
+        let sampleNewCol = this.table.children[0].children[0].cloneNode(false);
+        sampleNewCol.innerHTML = "";
+        for(let i = 0; i < this.table.children.length;i++){
+            let newCol = sampleNewCol.cloneNode(false);
+            this.table.children[i].appendChild(newCol);
+        }
+        if(this.table.children[0].children.length <= 2) {
+            let marginTop = Number(this.btnDelRow.style.marginTop.split('px')[0]);
+            marginTop += TABLE_BLOCK_SIZE;
+            this.btnDelRow.style.marginTop = marginTop + 'px';
+            this.hideBtnDelCol(false);
+            this.isVisibleBtnDelCol = 1;
+        }
     }
 
-    renderApp(true);
+
 }
+
+let table = new SuperTable();
+document.querySelector('.table').onmouseover = (e) => table.moveBtns(e.target);
+document.querySelector('.app').onmouseleave = () => table.hideBtns(true);
+document.querySelector('.app').onmouseenter = () => table.hideBtns(false);
+document.querySelector('.btn-del-row').onclick = (e)=> table.deleteRow(e.target);
+document.querySelector('.btn-del-col').onclick = (e)=> table.deleteCol(e.target);
+document.querySelector('.btn-add-row').onclick = () => table.addRow();
+document.querySelector('.btn-add-col').onclick = () => table.addCol();
