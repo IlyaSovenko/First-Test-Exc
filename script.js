@@ -4,8 +4,8 @@ class SuperTable {
         this.table = elem.querySelector('.ST-table').firstElementChild;
         this.btnDelRow = elem.querySelector('.ST-table__btn_position-left');
         this.btnDelCol = elem.querySelector('.ST-table__btn_position-top');
-        this.tableBlockSize = 44;
-        this.tableBorderSize = 3;
+        this.tableBlockSize = 53;
+        this.tableBorderSize = 4;
         this.initTableJS(elem);
     }
     initTableJS(element){

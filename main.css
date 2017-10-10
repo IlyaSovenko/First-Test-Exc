@@ -15,45 +15,47 @@
 .ST-table__btn_position-right{
   display: inline-block;
   float: left;
-  margin-top: 47px;
-  margin-left: 1.5px;
+  margin-top: 57px;
+  margin-left: 3px;
 }
 .ST-table__btn_position-left{
   display: inline-block;
   float: left;
-  width: 42px;
-  margin-top: 47px;
-  margin-right: 1.5px;
+  width: 50px;
+  margin-top: 57px;
+  margin-right: 3px;
 }
 .ST-table{
   border-spacing: 0;
   border: 1px solid #48aae6;
-  padding: 1px;
+  padding: 1.5px;
 }
 .ST-table__btn_position-top{
-  height: 42px;
-  margin-bottom: 1.5px;
-  margin-left: 3px;
+  height: 50px;
+  margin-bottom: 3px;
+  margin-left: 4px;
 }
 .ST-table__row{
   padding: 0;
   margin: 0;
 }
 .ST-table__col{
+  padding: 0;
   background-color: #48aae6;
-  width: 40px;
-  height: 40px;
-  border: 1px solid #fff;
+  width: 50px;
+  height: 50px;
+  border: 1.5px solid #fff;
   float: left;
 }
 .ST-table__btn_position-bottom{
-  margin-top: 1.5px;
-  margin-left: 3px;
+  margin-top: 3px;
+  margin-left: 4px;
 }
 .ST-btn {
+  padding: 0;
   color: white;
-  height: 42px;
-  width: 42px;
+  height: 50px;
+  width: 50px;
   opacity: 1;
   border: 0;
   cursor: pointer;
