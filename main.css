@@ -1,81 +1,62 @@
-.supertable-app{
+.st{
   display: inline-block;
+  position: relative;
 }
-.ST-container_position-center{
-  margin-left: 40%;
-  margin-top: 15%;
-}
-.ST-table__container{
-  float: left;
+.st__table{
+  margin: 52px 0 0 52px;
   display: inline-block;
-}
-.ST-table__btn{
-  transition:all 0.3s ease;
-}
-.ST-table__btn_position-right{
-  display: inline-block;
-  float: left;
-  margin-top: 47px;
-  margin-left: 1.5px;
-}
-.ST-table__btn_position-left{
-  display: inline-block;
-  float: left;
-  width: 42px;
-  margin-top: 47px;
-  margin-right: 1.5px;
-}
-.ST-table{
-  border-spacing: 0;
   border: 1px solid #48aae6;
-  padding: 1px;
 }
-.ST-table__btn_position-top{
-  height: 42px;
-  margin-bottom: 1.5px;
-  margin-left: 3px;
-}
-.ST-table__row{
-  padding: 0;
-  margin: 0;
-}
-.ST-table__col{
+.st__cell{
   background-color: #48aae6;
-  width: 40px;
-  height: 40px;
-  border: 1px solid #fff;
-  float: left;
+  width: 50px;
+  height: 50px;
 }
-.ST-table__btn_position-bottom{
-  margin-top: 1.5px;
-  margin-left: 3px;
-}
-.ST-btn {
+.st__btn {
   color: white;
-  height: 42px;
-  width: 42px;
+  height: 50px;
+  width: 50px;
   opacity: 1;
   border: 0;
   cursor: pointer;
+  position: absolute;
 }
-.ST-btn:hover{
+.st__btn:hover{
   transition:all 0.3s ease;
   opacity: 0.5;
 }
-.ST-btn_add{
-  font-size: 15px;
-  font-weight: bold;
+.st__btn-add{
   background-color: #f3a500;
 }
-.ST-btn_add::before{
+.st__btn-add::before{
+  font-size: 20px;
+  font-weight: 600;
   content: '+';
 }
-.ST-btn_del{
-  padding-bottom: 5px;
+.st__btn-del{
   transition:all 0.3s ease;
   background-color: #b20000;
 }
-.ST-btn_del::before{
+.st__btn-del::before{
   content: '-';
-  font-size: 1.7em;
+  font-size: 20px;
+  font-weight: 600;
+}
+.st__btn_position-left{
+  top: 53px;
+  margin-top: 2px;
+}
+.st__btn_position-top{
+  left: 53px;
+  margin-left: 2px;
+}
+.st__btn_position-right{
+  top: 55px;
+  margin-left: 2px;
+  left: 100%;
+}
+.st__btn_position-bottom{
+  top: 100%;
+  left: 55px;
+  margin-top: -2px;
 }
