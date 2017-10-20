@@ -4,7 +4,6 @@
 }
 .st__table{
   margin: 52px 0 0 52px;
-  display: inline-block;
   border: 1px solid #48aae6;
 }
 .st__cell{
@@ -58,5 +57,5 @@
 .st__btn_position-bottom{
   top: 100%;
   left: 55px;
-  margin-top: -2px;
+  margin-top: 2px;
 }
