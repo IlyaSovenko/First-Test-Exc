@@ -34,8 +34,8 @@ class Supertable extends React.Component{
     moveBtns(element){
         if(element.className !== 'st__cell') return;
         this.setState({
-            btnDelColMarginLeft: `${element.offsetLeft}px`,
-            btnDelRowMarginTop: `${element.offsetTop}px`,
+            btnDelColMarginLeft: element.offsetLeft,
+            btnDelRowMarginTop: element.offsetTop,
         });
         this.cellIndex = element.cellIndex;
         this.rowIndex = element.parentNode.rowIndex;
