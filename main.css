@@ -1,5 +1,4 @@
 .st{
-  display: inline-block;
   position: relative;
 }
 .st__table{
@@ -58,5 +57,5 @@
 .st__btn_position-bottom{
   top: 100%;
   left: 55px;
-  margin-top: -2px;
+  margin-top: 2px;
 }
