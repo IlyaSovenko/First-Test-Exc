@@ -1,0 +1,63 @@
+.Supertable{
+    display: inline-block;
+    position: relative;
+    margin: 0 55px 55px 0;
+}
+.Supertable >.table{
+    margin: 54px 0 0 54px;
+    display: inline-block;
+    border: 1px solid #48aae6;
+}
+.Supertable >.table .cell{
+    background-color: #48aae6;
+    width: 50px;
+    height: 50px;
+}
+.Supertable >.btn {
+    color: white;
+    height: 52px;
+    width: 52px;
+    opacity: 1;
+    border: 0;
+    cursor: pointer;
+    position: absolute;
+}
+.Supertable >.btn:hover{
+    transition:all 0.3s ease;
+    opacity: 0.5;
+}
+.Supertable >.btn-add{
+    background-color: #f3a500;
+}
+.Supertable >.btn-add::before{
+    font-size: 20px;
+    font-weight: 600;
+    content: '+';
+}
+.Supertable >.btn-del{
+    transition:all 0.3s ease;
+    background-color: #b20000;
+}
+.Supertable >.btn-del::before{
+    content: '-';
+    font-size: 20px;
+    font-weight: 600;
+}
+.Supertable >.btn_position-left{
+    top: 55px;
+    margin-top: 2px;
+}
+.Supertable >.btn_position-top{
+    left: 55px;
+    margin-left: 2px;
+}
+.Supertable >.btn_position-right{
+    top: 57px;
+    margin-left: 2px;
+    left: 100%;
+}
+.Supertable >.btn_position-bottom{
+    top: 100%;
+    left: 57px;
+    margin-top: -2px;
+}

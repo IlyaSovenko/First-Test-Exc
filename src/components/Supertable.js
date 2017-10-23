@@ -1,12 +1,13 @@
 import React from 'react';
+import './Supertable.css';
 
 class Supertable extends React.Component{
     constructor(props){
         super(props);
 
         this.state = {
-            btnDelColMarginLeft: '',
-            btnDelRowMarginTop: '',
+            btnDelColMarginLeft: 0,
+            btnDelRowMarginTop: 0,
             isHideBtnDelRow: true,
             isHideBtnDelCol: true,
             rowArr: [],
@@ -25,14 +26,14 @@ class Supertable extends React.Component{
             cellArr[i] = i;
         }
 
-        this.setState({rowArr:rowArr,cellArr:cellArr});
+        this.setState({rowArr,cellArr});
     }
 
     cellIndex = 0;
     rowIndex = 0;
 
     moveBtns(element){
-        if(element.className !== 'st__cell') return;
+        if(element.className !== 'cell') return;
         this.setState({
             btnDelColMarginLeft: element.offsetLeft,
             btnDelRowMarginTop: element.offsetTop,
@@ -43,9 +44,6 @@ class Supertable extends React.Component{
     }
 
     hideBtns(val){
-        if(!val){
-
-        }
         this.setState((prevState)=>({
             //Проверяем, если строка или столбец остались в 1 екземпляре - не отображаем кнопку
             isHideBtnDelCol: !Boolean(prevState.cellArr.length - 1)||val,
@@ -53,57 +51,65 @@ class Supertable extends React.Component{
         }))
     }
 
-    addRow(){
+    addRow = () => {
         let newEl = this.state.rowArr[this.state.rowArr.length - 1] + 1;
         this.setState((prevSt)=>({rowArr: [...prevSt.rowArr,newEl]}));
-    }
+    };
 
-    addCol(){
+    addCol = () => {
         let newEl = this.state.cellArr[this.state.cellArr.length - 1] + 1;
         this.setState((prevSt)=>({cellArr: [...prevSt.cellArr,newEl]}));
-    }
+    };
 
-    delRow(){
+    delRow = () => {
         this.setState((prevSt)=>({rowArr: [...prevSt.rowArr.slice(0,this.rowIndex),...prevSt.rowArr.slice(this.rowIndex + 1)]}));
         if(this.state.rowArr.length === 2 || this.rowIndex === this.state.rowArr.length - 1){
             this.setState({isHideBtnDelRow: true})
         }
-    }
+    };
 
-    delCol(){
+    delCol = () => {
         this.setState((prevSt)=>({cellArr: [...prevSt.cellArr.slice(0,this.cellIndex),...prevSt.cellArr.slice(this.cellIndex + 1)]}));
         if(this.state.cellArr.length === 2 || this.cellIndex === this.state.cellArr.length - 1){
             this.setState({isHideBtnDelCol: true});
         }
-    }
+    };
 
 
     render(){
+        const {
+            rowArr,
+            cellArr,
+            btnDelColMarginLeft,
+            btnDelRowMarginTop ,
+            isHideBtnDelRow,
+            isHideBtnDelCol,
+        } = this.state;
         return(
-            <div className="st" onMouseLeave={this.hideBtns.bind(this,true)}>
+            <div className="Supertable" onMouseLeave={this.hideBtns.bind(this,true)}>
                 <button
-                    className="st__btn st__btn-del st__btn-del_row st__btn_position-left"
-                    style={{marginTop: this.state.btnDelRowMarginTop}}
-                    hidden={this.state.isHideBtnDelRow}
-                    onClick={this.delRow.bind(this)}
+                    className="btn btn-del btn-del_row btn_position-left"
+                    style={{marginTop: btnDelRowMarginTop}}
+                    hidden={isHideBtnDelRow}
+                    onClick={this.delRow}
                 />
                 <button
-                    className="st__btn st__btn-del st__btn-del_col st__btn_position-top"
-                    style={{marginLeft: this.state.btnDelColMarginLeft}}
-                    hidden={this.state.isHideBtnDelCol}
-                    onClick={this.delCol.bind(this)}
+                    className="btn btn-del btn-del_col btn_position-top"
+                    style={{marginLeft: btnDelColMarginLeft}}
+                    hidden={isHideBtnDelCol}
+                    onClick={this.delCol}
                 />
 
                 <table
-                    className="st__table"
+                    className="table"
                     onMouseOver={(e) => this.moveBtns(e.target)}
                     onMouseEnter={this.hideBtns.bind(this,false)}
                 >
                     <tbody>
-                    {this.state.rowArr.map((val) =>
+                    {rowArr.map((val) =>
                         <tr key={val} >
-                            {this.state.cellArr.map((val) =>
-                                <td key={val} className="st__cell" />
+                            {cellArr.map((val) =>
+                                <td key={val} className="cell" />
                             )}
                         </tr>
                     )}
@@ -111,12 +117,12 @@ class Supertable extends React.Component{
                 </table>
 
                 <button
-                    className="st__btn st__btn-add st__btn-add_row st__btn_position-bottom"
-                    onClick={this.addRow.bind(this)}
+                    className="btn btn-add btn-add_row btn_position-bottom"
+                    onClick={this.addRow}
                 />
                 <button
-                    className="st__btn st__btn-add st__btn-add_col st__btn_position-right"
-                    onClick={this.addCol.bind(this)}
+                    className="btn btn-add btn-add_col btn_position-right"
+                    onClick={this.addCol}
                 />
             </div>
         )
