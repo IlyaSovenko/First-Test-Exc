@@ -1,6 +1,7 @@
 .st{
   display: inline-block;
   position: relative;
+  margin: 0 54px 54px 0;
 }
 .st__table{
   margin: 54px 0 0 54px;
