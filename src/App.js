@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Supertable from './components/Supertable';
 
 class App extends Component {
