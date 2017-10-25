@@ -21,8 +21,8 @@ class SuperTable {
 
     moveBtns(element){
         if(element.className !== 'st__cell') return;
-        this.btnDelCol.style.marginLeft = `${element.offsetLeft}px`;
-        this.btnDelRow.style.marginTop = `${element.offsetTop}px`;
+        this.btnDelCol.style.marginLeft = `${element.offsetLeft + 1}px`;
+        this.btnDelRow.style.marginTop = `${element.offsetTop + 1}px`;
         this.cellNum = element.cellIndex;
         this.rowNum = element.parentNode.rowIndex;
     }

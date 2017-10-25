@@ -1,21 +1,21 @@
 .st{
   display: inline-block;
   position: relative;
-  margin: 0 54px 54px 0
+  margin: 52px;
 }
 .st__table{
-  margin: 54px 0 0 54px;
   border: 1px solid #48aae6;
 }
 .st__cell{
   background-color: #48aae6;
+  padding: 0;
   width: 50px;
   height: 50px;
 }
 .st__btn {
   color: white;
-  height: 52px;
-  width: 52px;
+  height: 50px;
+  width: 50px;
   opacity: 1;
   border: 0;
   cursor: pointer;
@@ -43,20 +43,22 @@
   font-weight: 600;
 }
 .st__btn_position-left{
-  top: 55px;
-  margin-top: 2px;
+  right: 100%;
+  margin-top: 3px;
+  margin-right: 2px;
 }
 .st__btn_position-top{
-  left: 55px;
-  margin-left: 2px;
+  bottom: 100%;
+  margin-left: 3px;
+  margin-bottom: 2px;
 }
 .st__btn_position-right{
-  top: 57px;
-  margin-left: 2px;
   left: 100%;
+  top: 3px;
+  margin-left: 2px;
 }
 .st__btn_position-bottom{
   top: 100%;
-  left: 57px;
+  left: 3px;
   margin-top: 2px;
 }
