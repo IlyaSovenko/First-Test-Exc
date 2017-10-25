@@ -6,10 +6,9 @@
         .st{
             display: inline-block;
             position: relative;
-            margin: 0 54px 54px 0;
+            margin: 52px;
         }
         .st__table{
-            margin: 54px 0 0 54px;
             display: inline-block;
             border: 1px solid #48aae6;
         }
@@ -17,11 +16,12 @@
             background-color: #48aae6;
             width: 50px;
             height: 50px;
+            padding: 0;
         }
         .st__btn {
             color: white;
-            height: 52px;
-            width: 52px;
+            height: 50px;
+            width: 50px;
             opacity: 1;
             border: 0;
             cursor: pointer;
@@ -49,29 +49,31 @@
             font-weight: 600;
         }
         .st__btn_position-left{
-            top: 55px;
-            margin-top: 2px;
+            right: 100%;
+            margin-top: 3px;
+            margin-right: 2px;
         }
         .st__btn_position-top{
-            left: 55px;
-            margin-left: 2px;
+            bottom: 100%;
+            margin-left: 3px;
+            margin-bottom: 2px;
         }
         .st__btn_position-right{
-            top: 57px;
-            margin-left: 2px;
             left: 100%;
+            top: 3px;
+            margin-left: 2px;
         }
         .st__btn_position-bottom{
             top: 100%;
-            left: 57px;
-            margin-top: -2px;
+            left: 3px;
+            margin-top: 2px;
         }
     </style>
 
     <div class="st">
 
-        <button class="st__btn st__btn-del st__btn-del_row st__btn_position-left"></button>
-        <button class="st__btn st__btn-del st__btn-del_col st__btn_position-top"></button>
+        <button class="st__btn st__btn-del st__btn-del_row st__btn_position-left" hidden></button>
+        <button class="st__btn st__btn-del st__btn-del_col st__btn_position-top" hidden></button>
 
         <table class="st__table">
             <tbody>
