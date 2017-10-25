@@ -6,8 +6,8 @@ class Supertable extends React.Component{
         super(props);
 
         this.state = {
-            btnDelColMarginLeft: 0,
-            btnDelRowMarginTop: 0,
+            btnDelColMarginLeft: 3,
+            btnDelRowMarginTop: 3,
             isHideBtnDelRow: true,
             isHideBtnDelCol: true,
             rowArr: [],
@@ -35,8 +35,8 @@ class Supertable extends React.Component{
     moveBtns(element){
         if(element.className !== 'cell') return;
         this.setState({
-            btnDelColMarginLeft: element.offsetLeft,
-            btnDelRowMarginTop: element.offsetTop,
+            btnDelColMarginLeft: element.offsetLeft + 1,
+            btnDelRowMarginTop: element.offsetTop + 1,
         });
         this.cellIndex = element.cellIndex;
         this.rowIndex = element.parentNode.rowIndex;
@@ -86,16 +86,30 @@ class Supertable extends React.Component{
             isHideBtnDelCol,
         } = this.state;
         return(
-            <div className="Supertable" onMouseLeave={this.hideBtns.bind(this,true)}>
+            <div
+                className="Supertable"
+                onMouseLeave={this.hideBtns.bind(this,true)}
+                style={{margin: this.props.cellsSize + this.props.tableSpacing}}
+            >
                 <button
                     className="btn btn-del btn-del_row btn_position-left"
-                    style={{marginTop: btnDelRowMarginTop}}
+                    style={{
+                        marginTop: btnDelRowMarginTop,
+                        height: this.props.cellsSize,
+                        width: this.props.cellsSize,
+                        marginRight: this.props.tableSpacing
+                    }}
                     hidden={isHideBtnDelRow}
                     onClick={this.delRow}
                 />
                 <button
                     className="btn btn-del btn-del_col btn_position-top"
-                    style={{marginLeft: btnDelColMarginLeft}}
+                    style={{
+                        marginLeft: btnDelColMarginLeft,
+                        height: this.props.cellsSize,
+                        width: this.props.cellsSize,
+                        marginBottom: this.props.tableSpacing
+                    }}
                     hidden={isHideBtnDelCol}
                     onClick={this.delCol}
                 />
@@ -104,12 +118,16 @@ class Supertable extends React.Component{
                     className="table"
                     onMouseOver={(e) => this.moveBtns(e.target)}
                     onMouseEnter={this.hideBtns.bind(this,false)}
+                    style={{
+                        borderSpacing: this.props.tableSpacing,
+                        borderWidth: this.props.tableBorderSize
+                    }}
                 >
                     <tbody>
                     {rowArr.map((val) =>
                         <tr key={val} >
                             {cellArr.map((val) =>
-                                <td key={val} className="cell" />
+                                <td key={val} className="cell" style={{height: this.props.cellsSize,width: this.props.cellsSize}} />
                             )}
                         </tr>
                     )}
@@ -119,10 +137,22 @@ class Supertable extends React.Component{
                 <button
                     className="btn btn-add btn-add_row btn_position-bottom"
                     onClick={this.addRow}
+                    style={{
+                        height: this.props.cellsSize,
+                        width: this.props.cellsSize,
+                        marginTop: this.props.tableSpacing,
+                        marginLeft: this.props.tableSpacing + this.props.tableBorderSize,
+                    }}
                 />
                 <button
                     className="btn btn-add btn-add_col btn_position-right"
                     onClick={this.addCol}
+                    style={{
+                        height: this.props.cellsSize,
+                        width: this.props.cellsSize,
+                        marginLeft: this.props.tableSpacing,
+                        top: this.props.tableSpacing + this.props.tableBorderSize,
+                    }}
                 />
             </div>
         )
@@ -131,7 +161,10 @@ class Supertable extends React.Component{
 
 Supertable.defaultProps = {
     colsNum: 4,
-    rowsNum: 4
+    rowsNum: 4,
+    cellsSize: 50,
+    tableBorderSize: 1,
+    tableSpacing: 2,
 };
 
 export default Supertable;
